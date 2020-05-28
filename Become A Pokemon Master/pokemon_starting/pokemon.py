@@ -8,7 +8,7 @@ class Pokemon():
         self.knocked_out = False
     
     def update_max_health(self):
-        self.max_health = 97 + (self.level * 3) #formula for calculating max health
+        self.max_health = 8 + (self.level * 2) #formula for calculating max health
 
     def lose_health(self, amount_lost):
         new_health = self.current_health - amount_lost
@@ -40,4 +40,34 @@ class Pokemon():
         self.knocked_out = True
     
     def attack(self, pokemon):
-        pass
+        damage_multiplier = 1
+        effective = "effective."
+        if self.p_type == "Fire":
+            if pokemon.p_type == "Water":
+                damage_multiplier = 0.5
+                effective = "not very effective..."
+            elif pokemon.p_type == "Grass":
+                damage_multiplier = 2
+                effective = "very effective!"
+        if self.p_type == "Water":
+            if pokemon.p_type == "Grass":
+                damage_multiplier = 0.5
+                effective = "not very effective..."
+            elif pokemon.p_type == "Fire":
+                damage_multiplier = 2
+                effective = "very effective!"
+        if self.p_type == "Grass":
+            if pokemon.p_type == "Fire":
+                damage_multiplier = 0.5
+                effective = "not very effective..."
+            elif pokemon.p_type == "Water":
+                damage_multiplier = 2
+                effective = "very effective!"
+        damage = self.level * damage_multiplier
+        print('{name} attacked {pokemon} and it was {effective} causing {damage} damage.'.format(name=self.name, pokemon = pokemon.name, effective=effective, damage=damage))
+        pokemon.lose_health(damage)
+        
+
+                
+                
+
