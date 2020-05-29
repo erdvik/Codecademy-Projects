@@ -3,12 +3,12 @@ class Pokemon():
         self.name = name
         self.p_type = p_type
         self.level = level
-        self.max_health = update_max_health()
-        self.current_health = max_health
+        self.max_health = 10
+        self.current_health = self.max_health
         self.knocked_out = False
     
     def update_max_health(self):
-        self.max_health = 8 + (self.level * 2) #formula for calculating max health
+        self.max_health = 10 + (self.level * 2) #formula for calculating max health
 
     def lose_health(self, amount_lost):
         new_health = self.current_health - amount_lost
@@ -27,7 +27,7 @@ class Pokemon():
                 self.current_health = self.max_health
             else:
                 self.current_health = new_health
-            print('{name} health is regained to {health}'.format(name=self.name, healht=self.current_health))
+            print('{name} health is regained to {health}'.format(name=self.name, health=self.current_health))
 
         else:
             print('{name} is knocked out and need to be revived to access health regain'.format(name=self.name))

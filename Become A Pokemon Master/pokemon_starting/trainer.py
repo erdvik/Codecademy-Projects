@@ -4,7 +4,7 @@ class Trainer():
         self.starter_pokemon = starter_pokemon
         self.pokemons = [starter_pokemon]
         self.potions = potions
-        self.currently_acctive_pokemon = pokemons[0]
+        self.currently_acctive_pokemon = self.pokemons[0]
 
     """
     methods:
@@ -14,7 +14,7 @@ class Trainer():
         pokemon = self.currently_acctive_pokemon
         potion_regain_amount = pokemon.level / 2
         print('{name} used a potion on {pokemon}!'.format(name=self.name, pokemon=pokemon.name))
-        self.currently_acctive_pokemon.regian_health(potion_regain_amount)
+        self.currently_acctive_pokemon.regain_health(potion_regain_amount)
     
     def attack_trainer(self, trainer):
         self_pokemon = self.currently_acctive_pokemon
@@ -22,7 +22,11 @@ class Trainer():
         print('{name} started an attack on {trainer}!'. format(name=self.name, trainer=trainer.name))
         self_pokemon.attack(enemy_pokemon)
 
-    def switch_pokemon(self, name):
+    def switch_pokemon(self):
+        print('Avalible Pokemons:')
+        for pokemon in pokemons:
+            print(pokemon.name)
+        name = input('Which pokemon do you want to switch to?')
         for i in range(pokemons.len()):
             if pokemons[i.name] == name:
                 old_pokemon = self.currently_acctive_pokemon
