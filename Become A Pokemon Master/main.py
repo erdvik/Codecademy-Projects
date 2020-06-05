@@ -70,6 +70,10 @@ while(True):
     
     break
 
+"""
+More trainers, pokemons and gyms could be added
+"""
+
     
 
 
