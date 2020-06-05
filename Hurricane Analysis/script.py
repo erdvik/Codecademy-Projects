@@ -1,8 +1,8 @@
 def main():
     updated_damages = update_damages(damages)
     hurricanes = construct_dictionary(names, months, years, max_sustained_winds, areas_affected, updated_damages, deaths)
-
-    print(hurricanes["Cuba I"])
+    hurricanes_by_year = construct_dictionary_year(hurricanes)
+    print(hurricanes_by_year[1933])
 
 # names of hurricanes
 names = ['Cuba I', 'San Felipe II Okeechobee', 'Bahamas', 'Cuba II', 'CubaBrownsville', 'Tampico', 'Labor Day', 'New England', 'Carol', 'Janet', 'Carla', 'Hattie', 'Beulah', 'Camille', 'Edith', 'Anita', 'David', 'Allen', 'Gilbert', 'Hugo', 'Andrew', 'Mitch', 'Isabel', 'Ivan', 'Emily', 'Katrina', 'Rita', 'Wilma', 'Dean', 'Felix', 'Matthew', 'Irma', 'Maria', 'Michael']
@@ -60,6 +60,21 @@ def construct_dictionary(names, months, years, max_sustained_winds, areas_affect
 
 # write your construct hurricane by year dictionary function here:
 
+def construct_dictionary_year(hurricanes):
+    hurricanes_year = {}
+    for hurricane in hurricanes:
+        hur = hurricanes.get(hurricane)
+        year = hur.get("Year")
+        if year not in hurricanes_year:
+            value_list = [hur]
+            hurricanes_year[year] = value_list
+        else:
+            hurricanes_year[year].append(hur)
+    return hurricanes_year
+
+
+
+        
 
 
 
