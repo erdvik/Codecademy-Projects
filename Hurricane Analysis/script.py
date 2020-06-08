@@ -6,6 +6,8 @@ def main():
     print(affected_areas_count)
     most_affected_area = find_most_affected_area(affected_areas_count) 
     print(most_affected_area)
+    highest_death_hurricane = find_most_deaths(hurricanes)
+    print(highest_death_hurricane)
 
 # names of hurricanes
 names = ['Cuba I', 'San Felipe II Okeechobee', 'Bahamas', 'Cuba II', 'CubaBrownsville', 'Tampico', 'Labor Day', 'New England', 'Carol', 'Janet', 'Carla', 'Hattie', 'Beulah', 'Camille', 'Edith', 'Anita', 'David', 'Allen', 'Gilbert', 'Hugo', 'Andrew', 'Mitch', 'Isabel', 'Ivan', 'Emily', 'Katrina', 'Rita', 'Wilma', 'Dean', 'Felix', 'Matthew', 'Irma', 'Maria', 'Michael']
@@ -89,20 +91,24 @@ def count_affected_areas(hurricanes):
 
 # write your find most affected area function here:
 
-def find_most_affected_area(d):
-     v=list(d.values())
-     k=list(d.keys()) 
+def find_most_affected_area(affected_area_count):
+     v=list(affected_area_count.values())
+     k=list(affected_area_count.keys())
      count = max(v)
      area = k[v.index(count)]
      return area, count
 
 # write your greatest number of deaths function here:
 
-
-
-
-
-
+def find_most_deaths(hurricanes):
+    max_death_hurricane = ""
+    death_count = 0
+    for hurricane in hurricanes.values():
+        death_number = hurricane.get("Deaths")
+        if death_number > death_count:
+            max_death_hurricane = hurricane.get("Name")
+            death_count = death_number
+    return max_death_hurricane, death_count
 
 # write your catgeorize by mortality function here:
 
