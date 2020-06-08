@@ -2,7 +2,7 @@ def main():
     updated_damages = update_damages(damages)
     hurricanes = construct_dictionary(names, months, years, max_sustained_winds, areas_affected, updated_damages, deaths)
     hurricanes_by_year = construct_dictionary_year(hurricanes)
-    print(hurricanes_by_year[1933])
+    count_affected_areas(hurricanes)
 
 # names of hurricanes
 names = ['Cuba I', 'San Felipe II Okeechobee', 'Bahamas', 'Cuba II', 'CubaBrownsville', 'Tampico', 'Labor Day', 'New England', 'Carol', 'Janet', 'Carla', 'Hattie', 'Beulah', 'Camille', 'Edith', 'Anita', 'David', 'Allen', 'Gilbert', 'Hugo', 'Andrew', 'Mitch', 'Isabel', 'Ivan', 'Emily', 'Katrina', 'Rita', 'Wilma', 'Dean', 'Felix', 'Matthew', 'Irma', 'Maria', 'Michael']
@@ -72,22 +72,17 @@ def construct_dictionary_year(hurricanes):
             hurricanes_year[year].append(hur)
     return hurricanes_year
 
-
-
-        
-
-
-
-
-
-
 # write your count affected areas function here:
 
-
-
-
-
-
+def count_affected_areas(hurricanes):
+    areas_count = {}
+    for hurricane in hurricanes.values():
+        for area in hurricane.get("Areas Affected"):
+            if area not in areas_count:
+                areas_count[area] = 1
+            else:
+                areas_count[area] += 1
+    return areas_count
 
 # write your find most affected area function here:
 
