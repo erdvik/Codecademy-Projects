@@ -9,7 +9,10 @@ def main():
     highest_death_hurricane = find_most_deaths(hurricanes)
     # print(highest_death_hurricane)
     mortality_rating = construct_mortality_rating_dict(hurricanes)
-    print(mortality_rating)
+    # print(mortality_rating)
+    highest_damage_hurricane = find_greatest_damage(hurricanes)
+  
+    print(highest_damage_hurricane)
 
 # names of hurricanes
 names = ['Cuba I', 'San Felipe II Okeechobee', 'Bahamas', 'Cuba II', 'CubaBrownsville', 'Tampico', 'Labor Day', 'New England', 'Carol', 'Janet', 'Carla', 'Hattie', 'Beulah', 'Camille', 'Edith', 'Anita', 'David', 'Allen', 'Gilbert', 'Hugo', 'Andrew', 'Mitch', 'Isabel', 'Ivan', 'Emily', 'Katrina', 'Rita', 'Wilma', 'Dean', 'Felix', 'Matthew', 'Irma', 'Maria', 'Michael']
@@ -113,6 +116,7 @@ def find_most_deaths(hurricanes):
     return max_death_hurricane, death_count
 
 # write your catgeorize by mortality function here:
+
 mortality_scale = {0: 0,
                    1: 100,
                    2: 500,
@@ -142,24 +146,20 @@ def construct_mortality_rating_dict(hurricanes):
             mortality_rating[5].append(hurricane)
             continue
     return mortality_rating
-            
-            
-            
-
-
-    
-
-
-
-
 
 # write your greatest damage function here:
 
-
-
-
-
-
+def find_greatest_damage(hurricanes):
+    greatest_damage = 0.0
+    hurricane = None
+    for element in hurricanes.values():
+        damage = element.get("Damage")
+        if isinstance(damage, str):
+            continue
+        if damage > greatest_damage:
+            greatest_damage = damage
+            hurricane = element
+    return hurricane["Name"], greatest_damage
 
 # write your catgeorize by damage function here:
 
