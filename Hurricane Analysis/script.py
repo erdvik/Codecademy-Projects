@@ -3,11 +3,13 @@ def main():
     hurricanes = construct_dictionary(names, months, years, max_sustained_winds, areas_affected, updated_damages, deaths)
     hurricanes_by_year = construct_dictionary_year(hurricanes)
     affected_areas_count = count_affected_areas(hurricanes)
-    print(affected_areas_count)
+    # print(affected_areas_count)
     most_affected_area = find_most_affected_area(affected_areas_count) 
-    print(most_affected_area)
+    # print(most_affected_area)
     highest_death_hurricane = find_most_deaths(hurricanes)
-    print(highest_death_hurricane)
+    # print(highest_death_hurricane)
+    mortality_rating = construct_mortality_rating_dict(hurricanes)
+    print(mortality_rating)
 
 # names of hurricanes
 names = ['Cuba I', 'San Felipe II Okeechobee', 'Bahamas', 'Cuba II', 'CubaBrownsville', 'Tampico', 'Labor Day', 'New England', 'Carol', 'Janet', 'Carla', 'Hattie', 'Beulah', 'Camille', 'Edith', 'Anita', 'David', 'Allen', 'Gilbert', 'Hugo', 'Andrew', 'Mitch', 'Isabel', 'Ivan', 'Emily', 'Katrina', 'Rita', 'Wilma', 'Dean', 'Felix', 'Matthew', 'Irma', 'Maria', 'Michael']
@@ -111,8 +113,41 @@ def find_most_deaths(hurricanes):
     return max_death_hurricane, death_count
 
 # write your catgeorize by mortality function here:
+mortality_scale = {0: 0,
+                   1: 100,
+                   2: 500,
+                   3: 1000,
+                   4: 10000}
+
+def construct_mortality_rating_dict(hurricanes):
+    mortality_rating = {0: [], 1: [], 2: [], 3: [], 4: [], 5: []}
+    for hurricane in hurricanes.values():
+        death_number = hurricane.get("Deaths")
+        if death_number == 0:
+            mortality_rating[0].append(hurricane)
+            continue
+        if 0 < death_number <= 100:
+            mortality_rating[1].append(hurricane)
+            continue
+        if 100 < death_number <= 500:
+            mortality_rating[2].append(hurricane)
+            continue
+        if 500 < death_number <= 1000:
+            mortality_rating[3].append(hurricane)
+            continue
+        if 1000 < death_number <= 10000:
+            mortality_rating[4].append(hurricane)
+            continue
+        if death_number > 10000:
+            mortality_rating[5].append(hurricane)
+            continue
+    return mortality_rating
+            
+            
+            
 
 
+    
 
 
 
