@@ -11,8 +11,9 @@ def main():
     mortality_rating = construct_mortality_rating_dict(hurricanes)
     # print(mortality_rating)
     highest_damage_hurricane = find_greatest_damage(hurricanes)
-  
-    print(highest_damage_hurricane)
+    # print(highest_damage_hurricane)
+    damage_rating = construct_damage_rating_dict(hurricanes)
+    print(damage_rating)
 
 # names of hurricanes
 names = ['Cuba I', 'San Felipe II Okeechobee', 'Bahamas', 'Cuba II', 'CubaBrownsville', 'Tampico', 'Labor Day', 'New England', 'Carol', 'Janet', 'Carla', 'Hattie', 'Beulah', 'Camille', 'Edith', 'Anita', 'David', 'Allen', 'Gilbert', 'Hugo', 'Andrew', 'Mitch', 'Isabel', 'Ivan', 'Emily', 'Katrina', 'Rita', 'Wilma', 'Dean', 'Felix', 'Matthew', 'Irma', 'Maria', 'Michael']
@@ -163,6 +164,37 @@ def find_greatest_damage(hurricanes):
 
 # write your catgeorize by damage function here:
 
+damage_scale = {0: 0,
+                1: 100000000,
+                2: 1000000000,
+                3: 10000000000,
+                4: 50000000000}
 
-if __name__== "__main__":
+def construct_damage_rating_dict(hurricanes):
+    damage_rating = {0: [], 1: [], 2: [], 3: [], 4: [], 5: []}
+    for hurricane in hurricanes.values():
+        damage_number = hurricane.get("Damage")
+        if damage_number == "Damages not recorded":
+            damage_rating[0].append(hurricane["Name"])
+            continue
+        if 0.0 < damage_number <= 100000000.0:
+            damage_rating[1].append(hurricane["Name"])
+            continue
+        if 100000000.0 < damage_number <= 1000000000.0:
+            damage_rating[2].append(hurricane["Name"])
+            continue
+        if 1000000000.0 < damage_number <= 10000000000.0:
+            damage_rating[3].append(hurricane["Name"])
+            continue
+        if 10000000000.0 < damage_number <= 50000000000.0:
+            damage_rating[4].append(hurricane["Name"])
+            continue
+        if damage_number > 50000000000.0:
+            damage_rating[5].append(hurricane["Name"])
+            continue
+    return damage_rating
+
+# main
+
+if __name__ == "__main__":
     main()
