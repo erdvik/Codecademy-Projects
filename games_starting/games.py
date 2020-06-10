@@ -7,7 +7,9 @@ def main():
     # coinflip("Tails", 20)
     # print(money)
 
-    cho_han("Odd", 10)
+    # cho_han("Odd", 10)
+
+    card_pick(None, None)
 
 
 
@@ -26,7 +28,7 @@ def coinflip(guess, amount):
             elif num == 2:
                 coin = "Tails"
             if guess == coin:
-                did_win(True, amount, 2)           
+                did_win(True, amount, 1)           
             else:
                 did_win(False, amount)     
         else:
@@ -53,16 +55,16 @@ def cho_han(guess, amount):
             sleep(1)
             if score % 2 == 0: #even number
                 if guess == "Even":
-                    did_win(True, amount, 2)
+                    did_win(True, amount, 1)
                 else:
                     did_win(False, amount)
             else: #odd number
                 if guess == "Odd":
-                    did_win(True, amount, 2)
+                    did_win(True, amount, 1)
                 else:
                     did_win(False, amount)
                 
-def did_win(won, amount, multiplier=2):
+def did_win(won, amount, multiplier=1):
     global money
     if won == True:
         money += amount * multiplier
@@ -72,7 +74,21 @@ def did_win(won, amount, multiplier=2):
         print('You lost.. New balance is {money}.'.format(money=money))
     else:
         print('Error in won_or_loss function')          
-                
+             
+def card_pick(card, amount):
+    avalible_cards = [[j for j in range(14)] for i in range(4)]
+    if card in avalible_cards:
+        global money
+        if amount <= money:
+            #player 
+
+
+
+            #house picks a card
+            deck = random.randint(0,3)
+            card = random.randint(0,13)
+
+
 
 
 
