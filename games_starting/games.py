@@ -8,8 +8,8 @@ def main():
     # print(money)
 
     # cho_han("Odd", 10)
+    card_pick_game(10)
 
-    card_pick(None, None)
 
 
 
@@ -75,22 +75,49 @@ def did_win(won, amount, multiplier=1):
     else:
         print('Error in won_or_loss function')          
              
-def card_pick(card, amount):
-    avalible_cards = [[j for j in range(14)] for i in range(4)]
-    if card in avalible_cards:
-        global money
-        if amount <= money:
-            #player 
+def card_pick_game(amount):
+    avalible_cards = [[j for j in range(14)] for i in range(4)] 
+    global money
+    if amount <= money: #game can start
+        #player picks a card
+        print('Player picks a card...')
+        card = choose_random_card(avalible_cards)
+        del avalible_cards[random.randint(0,3)][card]
+        sleep(1)
+        print('Player picked {0}'.format(card))
+        sleep(2)
+        #house picks a card
+        print('House pics a card...')
+        house_card = choose_random_card(avalible_cards)
+        sleep(3)
+        print('It was a {0}!'.format(house_card))
+        sleep(1)
+        if card > house_card:
+            did_win(True, amount)
+        elif card < house_card:
+            did_win(False, amount)
+        else:
+            print("It was a tie! Money refunded.")
+    else:
+        print('Not enough money to play...')
+    
+def choose_random_card(avalible_cards):
+    i = 0
+    while i < 1000:
+        deck = random.randint(0,3)
+        card = random.randint(0,13)
+        try:
+            picked_card = avalible_cards[deck][card]
+            return picked_card
+        except:
+            i += 1
+            continue
+        print("Couldnt find any avalible cards after 1000 tries")
 
+            
 
-
-            #house picks a card
-            deck = random.randint(0,3)
-            card = random.randint(0,13)
-
-
-
-
+        
+        
 
 
 
