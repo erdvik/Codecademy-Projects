@@ -6,7 +6,7 @@ def main():
     # coinflip("Tails", 20)
     # cho_han("Odd", 10)
     #card_pick_game(10)
-    roulette(00, 10)
+    roulette("4", 10)
 
 
 
@@ -114,40 +114,38 @@ def choose_random_card(avalible_cards):
 
 def roulette(guess, amount):
     avalible_guesses = ["Odd", "Even", "Row", "00"] + [str(i) for i in range(36)]
-    guess = str(guess)
-    if guess in avalible_guesses:
-        global money
-        if amount <= money:
-            print('Your guess is {0}'.format(guess))
-            sleep(1)
-            print("Rolling ball...")
-            sleep(3)
-            ball_landing = random.randint(0, 36)
-            ball_landing = 36
-            if ball_landing == 36: #36 is equal to a 00 guess
-                ball_landing = "00"
-            print("Ball landed on {0}".format(ball_landing))
-            sleep(1)
-            if (guess == "Row") and (str(ball_landing) == "0" or ball_landing == "00"):
-                did_win(True, amount, 17)
-            elif ball_landing == "00" and guess == "00": 
-                did_win(True, amount, 35)
-            elif guess == str(ball_landing):
-                did_win(True, amount, 35)
-            elif ball_landing % 2 == 0 and guess == "Even":
-                did_win(True, amount, 1)
-            elif ball_landing % 2 != 0 and guess == "Odd":
-                did_win(True, amount, 1)
+    if isinstance(guess, str):
+        if guess in avalible_guesses:
+            global money
+            if amount <= money:
+                print('Your guess is {0}'.format(guess))
+                sleep(1)
+                print("Rolling ball...")
+                sleep(3)
+                ball_landing = random.randint(0, 36)
+                if ball_landing == 36: #36 is equal to a 00 guess
+                    ball_landing = "00"
+                print("Ball landed on {0}".format(ball_landing))
+                sleep(1)
+                if (guess == "Row") and (str(ball_landing) == "0" or ball_landing == "00"):
+                    did_win(True, amount, 17)
+                elif ball_landing == "00" and guess == "00": 
+                    did_win(True, amount, 35)
+                elif guess == str(ball_landing):
+                    did_win(True, amount, 35)
+                elif ball_landing % 2 == 0 and guess == "Even":
+                    did_win(True, amount, 1)
+                elif ball_landing % 2 != 0 and guess == "Odd":
+                    did_win(True, amount, 1)
+                else:
+                    did_win(False, amount)
             else:
-                did_win(False, amount)
+                print("Not enough money...")
         else:
-            print("Not enough money...")
+            print("Not an availible guess. Avalible guesses:")
+            print(avalible_guesses)
     else:
-        print("Not an availible guess. Avalible guesses:")
-        print(avalible_guesses)
-
-    #TODO:
-    # fix bug with 00 input  
+        print("Guess needs to be of type String") 
             
             
                 
