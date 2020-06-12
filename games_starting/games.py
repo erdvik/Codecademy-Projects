@@ -150,7 +150,7 @@ def roulette(guess, amount, avalible_funds):
                 sleep(3)
                 ball_landing = random.randint(0, 36)
                 if ball_landing == 36: #36 is equal to a 00 guess
-                    ball_landing = 4
+                    ball_landing = "00"
                 print("Ball landed on {0}".format(ball_landing))
                 sleep(1)
                 if (guess == "Row") and (ball_landing == 0 or ball_landing == "00"):
